@@ -11,42 +11,42 @@
 <div class="panel-body">
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered" >
-			<thead>
-				<tr>
-					<th>No</th>
-					<th>NIS</th>
-					<th>Nama</th>
-					<th>Tempat Lahir</th>
-					<th>Tanggal Lahir</th>
-					<th>Jenis Kelamin</th>
-					<th>Tingkat</th>
-				</tr>
-			</thead>
-<?php
-
-
-	$no = 1;
-	$p = mysqli_query($conn,"SELECT * FROM tb_anggota");
-
-	while($data = mysqli_fetch_array($p)){
-	  $jk = ($data['jk']=='l')?"Laki - Laki":"Perempuan";
-		echo"<tr>
-				<td>$no</td>
-				<td>$data[nis]</td>
-				<td>$data[nama]</td>
-				<td>$data[tmp_lahir]</td>
-				<td>$data[tgl_lahir]</td>
-				<td>$jk</td>
-				<td>$data[tingkat]</td>
-			</tr>";
-	$no++;
-	}
-
-?>
-</table>
+			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>NIS</th>
+						<th>Nama Anggota</th>
+						<th>Tempat Lahir</th>
+						<th>Tanggal Lahir</th>
+						<th>Jenis Kelamin</th>
+						<th>Tingkat</th>
+					</tr>
+				</thead>
+				<!-- fetching item dari database ke form -->
+				<tbody>
+					<?php
+						$no = 1;
+						$query = "SELECT * FROM tb_anggota WHERE hapus = 'tidak'";
+						$sql = $conn -> query($query);
+						while ($data= $sql-> fetch_assoc()){
+						$jk = ($data['jk']=='l')?"Laki - Laki":"Perempuan";
+					?>
+					<tr>
+						<td><?php echo $no++; ?></td>
+						<td><?php echo $data['nis'];?></td>
+						<td><?php echo $data['nama_anggota'];?></td>
+						<td><?php echo $data['tmp_lahir'];?></td>
+						<td><?php echo $data['tgl_lahir'];?></td>
+						<td><?php echo $jk;?></td>
+						<td><?php echo $data['tingkat'];?></td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 
 </div>
 </div>
 </div>
  <!-- <a target="_blank" class="btn btn-primary" href="page/laporan/anggota/print/pdf_mysql.php" style="margin-bottom: 10px"><i class="material-icons md-18">print</i> PRINT</a> -->
-<a target="_blank" href="../laporan_anggota.php" class="btn btn-primary" style="margin-bottom: 10px"><i class="material-icons md-18">print</i> Cetak Laporan</a>
+ <a target="_blank" href="../cetak_laporan/laporan_anggota.php" class="btn btn-primary" style="margin-bottom: 10px"><i class="material-icons md-18">print</i> Cetak Laporan</a>

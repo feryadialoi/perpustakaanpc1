@@ -70,7 +70,7 @@
 </div>
 </div>
 </div>
-<!-- Pinjaman Buku Yang Belum Dikembalikan Bulanan -->
+<!-- transaksi status pinjam Bulanan -->
 <a target="_blank" href="../cetakpinjam.php" class="btn btn-primary" style="margin-bottom: 10px"><i class="material-icons md-18">print</i> Cetak Laporan</a>
 <div class="row">
 <div class="col-md-12">
@@ -140,7 +140,7 @@
 </div>
 </div>
 </div>
-<!-- Pinjaman Buku Yang Sudah Dikembalikan Bulanan -->
+<!-- transaksi status kembali Bulanan -->
 <a target="_blank" href="../cetakkembali.php" class="btn btn-primary" style="margin-bottom: 10px"><i class="material-icons md-18">print</i> Cetak Laporan</a>
 <div class="row">
 <div class="col-md-12">

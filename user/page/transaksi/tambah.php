@@ -30,11 +30,11 @@
                                        </div>
                                      <div class="form-group">
                                          <label>Tanggal Pinjam</label>
-                                         <input class="form-control" name="tgl_pinjam" type="date" id="tgl_pinjam" value="<?php echo $tgl_pinjam ?>" />
+                                         <input class="form-control" name="tgl_pinjam" type="date" id="tgl_pinjam" value="<?php echo $tgl_pinjam ?>" required/>
                                      </div>
                                      <div class="form-group">
                                          <label>Tanggal Kembali</label>
-                                         <input class="form-control" name="tgl_kembali" type="date" id="tgl_kembali" value="<?php echo $kembali ?>"/>
+                                         <input class="form-control" name="tgl_kembali" type="date" id="tgl_kembali" value="<?php echo $kembali ?>" required/>
                                      </div>
                                      <div class="form-group">
                                        <!-- <input type="submit" name="simpan" value="Simpan" class="btn btn-primary"> -->

@@ -1,20 +1,30 @@
-<!-- php code untuk session login mengecek status login start-->
+<!-- php code untuk session login mengecek level login start-->
 <?php
   include '../koneksi.php';
   //mengaktifkan session_start
   session_start();
   //cek apakah user telah login, jika belum login maka di alihkan ke halaman Login
-  if($_SESSION['status'] !="loginUser") {
+  if($_SESSION['level'] !="loginUser") {
     header("location:../index.php");
   }
+
+  $sql_pengaturan = $conn -> query("SELECT * FROM tb_pengaturan");
+  $data_pengaturan = $sql_pengaturan -> fetch_assoc();
+
+  $_SESSION['denda'] = $data_pengaturan['denda'];
+  $denda = $_SESSION['denda'];
+  $_SESSION['maksimal_lama_pinjam'] = $data_pengaturan['maksimal_lama_pinjam'];
+  $maks = $_SESSION['maksimal_lama_pinjam'];
+
+  // $kode_pinjam = $_REQUEST['kode_pinjam'];
 ?>
-<!-- php code untuk session login mengecek status login end-->
+<!-- php code untuk session login mengecek level login end-->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Anggota - Perpustakaan Pelita Cemerlang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="shortcut icon" href="../assets/img/logo.png">
@@ -25,10 +35,10 @@
   <!-- topbar menu start -->
   <div class="top-bar">
     <div class="hamburger">
-      <button class="hamburger-button" onclick="toggleNav()"><i class="material-icons logout-button">menu</i></button>
+      <button id="ham"class="hamburger-button" onclick="toggleNav()"><i class="material-icons logout-button">menu</i></button>
     </div>
     <div id="logoutButton" class="hamburger hamburger-logout">
-      <button class="hamburger-button" data-toggle="modal" data-target="#myModal"><i class="material-icons logout-button">exit_to_app</i> Logout</button>
+      <button class="hamburger-button" data-toggle="modal" data-target="#modal_logout"><i class="material-icons logout-button">exit_to_app</i> Logout</button>
     </div>
     <div class="top-bar-menu">
       <script type="text/javascript">
@@ -39,6 +49,7 @@
           //buat object date berdasarkan waktu di client
           var clientTime = new Date();
           //hitung selisih
+          // var Diff = serverTime.getTime() - clientTime.getTime();
           var Diff = serverTime.getTime() - clientTime.getTime();
           //fungsi displayTime yang dipanggil di bodyOnLoad dieksekusi tiap 1000ms = 1detik
           function displayServerTime(){
@@ -91,21 +102,16 @@
     </div>
     <div class="top-bar-menu" style="color:yellow; padding-left:20px; font-size:14px;">
       <?php
-        include '../koneksi.php';
-        // session_start();
-          $username = $_SESSION['username'];
-
-        mysqli_select_db($conn,'perpustakaan');
-        $result = mysqli_query($conn,"SELECT * FROM tbuser WHERE username = '$username'");
-
+        $username = $_SESSION['username'];
+        $result = mysqli_query($conn,"SELECT * FROM tb_user WHERE username = '$username'");
         if (mysqli_num_rows($result) > 0) {
-          // output data of each row
           while($row = mysqli_fetch_assoc($result)) {
-            // echo "id: " . $row["id"]. " - Name: " . $row["nama"]."<br>";
-            echo $row['nama'];
+            $_SESSION['nama_user'] = $row['nama_user'];
+            ?>
+            <span id="nama_user"><?php echo $_SESSION['nama_user']; ?></span>
+            <?php
           }
         }
-
       ?>
     </div>
   </div>
@@ -114,7 +120,7 @@
   <div id="mySidenav" class="sidenav tab">
     <!-- logo dan tagline start -->
     <div style="background:white;padding:10px;">
-      <h2 id="admin" class="admin">USER</h2>
+      <h2 id="admin" class="admin">PUSTAKAWAN</h2>
       <center><img src="../assets/img/logo.png" style="width:230px;" alt="logo"></center>
       <h2 style="text-align: Center;">Perpustakaan</h2>
     </div>
@@ -123,9 +129,9 @@
     <a class="<?php if($_GET['page'] == ''){ echo ' active';}?>" href="index.php"><i class="material-icons">dashboard</i> Dashboard</a>
     <a class="<?php if($_GET['page'] == 'anggota'){ echo ' active';}?>" href="?page=anggota"><i class="material-icons">account_box</i> Anggota</a>
     <a class="<?php if($_GET['page'] == 'buku'){ echo ' active';}?>" href="?page=buku"><i class="material-icons">book</i> Buku</a>
-    <a class="<?php if($_GET['page'] == 'transaksi'){ echo ' active';}?>" href="?page=transaksi"><i class="material-icons">event_note</i> Transaksi</a>
+    <a class="<?php if($_GET['page'] == 'peminjaman'){ echo ' active';}?>" href="?page=peminjaman"><i class="material-icons">event_note</i> Peminjaman</a>
     <a class="<?php if($_GET['page'] == 'laporan'){ echo ' active';}?>" href="?page=laporan"><i class="material-icons">perm_device_information</i> Laporan</a>
-    <!-- <a href="?page=pengaturan"><i class="material-icons">settings</i> Pengaturan</a> -->
+    <!-- <a class="<?php if($_GET['page'] == 'pengaturan'){ echo ' active';}?>" href="?page=pengaturan"><i class="material-icons">settings</i> Pengaturan</a> -->
     <!-- menu sidenav end -->
   </div>
   <!-- sidenav end -->
@@ -153,9 +159,6 @@
                 }
                 elseif ($aksi=="hapus"){
                   include "./page/anggota/hapus.php";
-                }
-                elseif ($aksi=="coba"){
-                  include "./page/anggota/coba.php";
                 }
               }
               else {
@@ -196,6 +199,23 @@
                 include "./page/transaksi/transaksi.php";
               }
             }
+            // page peminjaman: tambah
+            elseif($page == "peminjaman"){
+              if (isset($_GET['aksi'])){
+                if ($aksi=="tambah"){
+                  include "./page/peminjaman/tambah.php";
+                }
+                elseif ($aksi=="kembali"){
+                  include "./page/transaksi/kembali.php";
+                }
+                elseif ($aksi=="perpanjang"){
+                  include "./page/transaksi/perpanjang.php";
+                }
+              }
+              else {
+                include "./page/peminjaman/peminjaman.php";
+              }
+            }
             // page laporan:
             elseif($page == "laporan"){
               if (isset($_GET['aksi'])){
@@ -205,22 +225,22 @@
 	              elseif ($aksi=="buku"){
                   include "./page/laporan/buku/buku.php";
 	              }
-		            elseif ($aksi=="transaksi"){
-                  include "./page/laporan/transaksi/transaksi.php";
-                }
 		            elseif ($aksi=="btgl"){
-                  include "./page/laporan/transaksi/transaksi_tgl.php";
+                  include "./page/laporan/peminjaman/peminjaman_tgl.php";
                 }
 		            elseif ($aksi=="bsp"){
-                  include "./page/laporan/transaksi/transaksi_bsp.php";
+                  include "./page/laporan/peminjaman/peminjaman_bsp.php";
                 }
 		            elseif ($aksi=="bsk"){
-                  include "./page/laporan/transaksi/transaksi_bsk.php";
+                  include "./page/laporan/peminjaman/peminjaman_bsk.php";
                 }
               }
               else {
                 include "./page/laporan/laporan.php";
               }
+            }
+            elseif($page == "pengaturan") {
+              include "./page/pengaturan/pengaturan.php";
             }
             else {
               include "./page/dashboard.php";
@@ -235,68 +255,101 @@
   function toggleNav() {
     var x = document.getElementById("mySidenav");
     var y = document.getElementById("main");
-    if (y.style.marginLeft === "0px") {
+    if (y.style.marginLeft === "250px") {
       // sidenav close
-      x.style.marginLeft = "0px";
-      y.style.marginLeft = "250px";
-    } else {
-      // sidenav open
       x.style.marginLeft = "-250px";
       y.style.marginLeft = "0px";
+      console.log('1');
+    } else {
+      // sidenav open
+
+
+      x.style.marginLeft = "0px";
+      y.style.marginLeft = "250px";
+      console.log('2');
+      console.log(y.style.marginLeft);
     }
   }
-  </script>
+</script>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
+ <!-- Modal -->
+<div class="modal fade" id="modal_logout" role="dialog">
+	<div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"><i class="material-icons">exit_to_app</i> Logout</h4>
-          </div>
-          <div class="modal-body">
-            <p>Anda yakin ingin keluar ?</p>
-          </div>
-          <div class="modal-footer">
-            <a style="min-width:80px;" href="logout.php" class="btn btn-danger">Ya</a>
-            <button style="min-width:80px;" type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
-          </div>
-        </div>
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"><i class="material-icons">exit_to_app</i> Logout</h4>
+			</div>
+			<div class="modal-body">
+				<p>Anda yakin ingin keluar ?</p>
+			</div>
+			<div class="modal-footer">
+				<a style="min-width:80px;" href="logout.php" class="btn btn-danger">Ya</a>
+				<button style="min-width:80px;" type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+			</div>
+		</div>
+	</div>
+</div>
+<?php include '../admin/page/peminjaman/modal_cari_buku.php'; ?>
+<?php include '../admin/page/peminjaman/modal_perpanjang.php'; ?>
+<?php include '../admin/page/peminjaman/modal_kembalikan.php'; ?>
 
-      </div>
-    </div>
+<!-- script anti enter start -->
+<script type="text/javascript">
+  function stopRKey(evt) {
+    var evt = (evt) ? evt : ((event) ? event : null);
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+    if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+  }
+  document.onkeypress = stopRKey;
+</script>
+<!-- script anti enter end -->
 
+<!-- generator transaksi bag nis dan nama murid start-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+  $(function() {
+    $("#nis").change(function(){
+      var nis = $("#nis").val();
 
-  <!-- script anti enter start -->
-  <script type="text/javascript">
-    function stopRKey(evt) {
-      var evt = (evt) ? evt : ((event) ? event : null);
-      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-      if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
-    }
-    document.onkeypress = stopRKey;
-  </script>
-  <!-- script anti enter end -->
+      $.ajax({
+        url: '../prosesNis.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          'nis': nis
+        },
+        success: function (siswa) {
+          $("#nama").val(siswa['nama_anggota']);
+        }
+      });
+    });
 
-  <!-- generator transaksi bag nis dan nama murid start-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    $("form").submit(function(){
+
+    });
+  });
+</script>
+<!-- generator transaksi bag nis dan nama murid end-->
+
+<!-- generator bag isbn dan nama buku start-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script>
     $(function() {
-      $("#nis").change(function(){
-        var nis = $("#nis").val();
+      $("#isbn").change(function(){
+        var isbn = $("#isbn").val();
 
         $.ajax({
-          url: '../prosesNis.php',
+          url: '../prosesIsbn.php',
           type: 'POST',
           dataType: 'json',
           data: {
-            'nis': nis
+            'isbn': isbn
           },
           success: function (siswa) {
-            $("#nama").val(siswa['nama']);
+            $("#judul").val(siswa['judul']);
           }
         });
       });
@@ -306,56 +359,19 @@
       });
     });
   </script>
-  <!-- generator transaksi bag nis dan nama murid end-->
+<!-- generator bag isbn dan nama buku end-->
 
-  <!-- generator bag isbn dan nama buku start-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script>
-      $(function() {
-        $("#isbn").change(function(){
-          var isbn = $("#isbn").val();
+<script type="text/javascript"src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
-          $.ajax({
-            url: '../prosesIsbn.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-              'isbn': isbn
-            },
-            success: function (siswa) {
-              $("#judul").val(siswa['judul']);
-            }
-          });
-        });
+<!-- <script src="../assets/js/modal.js"></script> -->
 
-        $("form").submit(function(){
+<!-- jquery datatable -->
+<?php include './function_js.php'; ?>
 
-        });
-      });
-    </script>
-  <!-- generator bag isbn dan nama buku end-->
-
-  <script type="text/javascript"src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready( function () {
-      $('#myTable').DataTable();
-    });
-    $(document).ready(function () {
-      $('#dataTables-example').DataTable();
-    });
-
-    $(document).ready(function () {
-      $('#dataTables-example-pinjam').DataTable();
-    });
-
-    $(document).ready(function () {
-      $('#dataTables-example-kembali').DataTable();
-    });
-  </script>
-  </body>
-  </html>
+</body>
+</html>

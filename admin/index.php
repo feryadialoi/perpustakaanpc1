@@ -120,7 +120,7 @@
   <div id="mySidenav" class="sidenav tab">
     <!-- logo dan tagline start -->
     <div style="background:white;padding:10px;">
-      <h2 id="admin" class="admin">ADMIN</h2>
+      <h2 id="admin" class="admin">KEPALA PERPUS</h2>
       <center><img src="../assets/img/logo.png" style="width:230px;" alt="logo"></center>
       <h2 style="text-align: Center;">Perpustakaan</h2>
     </div>
@@ -129,11 +129,9 @@
     <a class="<?php if($_GET['page'] == ''){ echo ' active';}?>" href="index.php"><i class="material-icons">dashboard</i> Dashboard</a>
     <a class="<?php if($_GET['page'] == 'anggota'){ echo ' active';}?>" href="?page=anggota"><i class="material-icons">account_box</i> Anggota</a>
     <a class="<?php if($_GET['page'] == 'buku'){ echo ' active';}?>" href="?page=buku"><i class="material-icons">book</i> Buku</a>
-    <!-- <a class="<?php if($_GET['page'] == 'transaksi'){ echo ' active';}?>" href="?page=transaksi"><i class="material-icons">event_note</i> Transaksi</a> -->
     <a class="<?php if($_GET['page'] == 'peminjaman'){ echo ' active';}?>" href="?page=peminjaman"><i class="material-icons">event_note</i> Peminjaman</a>
     <a class="<?php if($_GET['page'] == 'laporan'){ echo ' active';}?>" href="?page=laporan"><i class="material-icons">perm_device_information</i> Laporan</a>
     <a class="<?php if($_GET['page'] == 'pengaturan'){ echo ' active';}?>" href="?page=pengaturan"><i class="material-icons">settings</i> Pengaturan</a>
-    <!-- <a href="?page=pengaturan"><i class="material-icons">settings</i> Pengaturan</a> -->
     <!-- menu sidenav end -->
   </div>
   <!-- sidenav end -->
