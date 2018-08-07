@@ -9,18 +9,18 @@
   </div>
 <div class="panel-body">
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <h2>Denda / hari</h2>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <?php echo "<h2>: Rp ".$data['denda']."</h2>"; ?>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <h2>Maksimal Lama Pinjam</h2>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <?php echo "<h2>: ".$data['maksimal_lama_pinjam']." Hari</h2>"; ?>
   </div>
 </div>
