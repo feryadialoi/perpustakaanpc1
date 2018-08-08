@@ -37,7 +37,7 @@
                     ON t1.kode_pinjam = t2.kode_pinjam
                     INNER JOIN tb_anggota t3
                     ON t1.nis = t3.nis
-                    WHERE t1.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 100 DAY) AND NOW()";
+                    WHERE t1.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()";
 
           $sql = $conn -> query($query1);
           while ($data= $sql-> fetch_assoc()){
@@ -126,7 +126,7 @@
                     ON t1.nis = t2.nis
                     INNER JOIN tb_detil_peminjaman t3
                     ON t2.kode_pinjam = t3.kode_pinjam
-                    WHERE t2.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 100 DAY) AND NOW()";
+                    WHERE t2.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()";
 
           $sql2 = $conn -> query($query2);
           while ($data2= $sql2-> fetch_assoc()){

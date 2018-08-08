@@ -33,7 +33,7 @@ $html = '
             ON t1.kode_pinjam = t2.kode_pinjam
             INNER JOIN tb_anggota t3
             ON t1.nis = t3.nis
-            ";
+            WHERE t1.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()";
 
 
   $sql = $conn -> query($query1);

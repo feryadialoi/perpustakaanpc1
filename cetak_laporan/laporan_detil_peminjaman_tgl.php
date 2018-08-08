@@ -43,7 +43,7 @@ $query1 = "SELECT* FROM tb_anggota t1
           ON t1.nis = t2.nis
           INNER JOIN tb_detil_peminjaman t3
           ON t2.kode_pinjam = t3.kode_pinjam
-          WHERE t2.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 100 DAY) AND NOW()";
+          WHERE t2.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()";
           $sql = $conn -> query($query1);
           while ($data= $sql-> fetch_assoc()){
             $html .=
