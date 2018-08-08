@@ -166,7 +166,7 @@
               if ($data['grandtotal_denda']>0) {
                 echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
               }else {
-                echo "Rp ">$data['grandtotal_denda'];
+                echo "Rp ".$data['grandtotal_denda'];
               }
               ?>
             </td>
