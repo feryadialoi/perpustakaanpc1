@@ -17,9 +17,12 @@
 
   for ($i=1; $i <= $jumlah_buku ; $i++) {
     $kode_buku = $isbn.'-'.sprintf('%03d',$i);
-    $conn->query("INSERT INTO tb_detil_buku (kode_buku,isbn,judul,pengarang,penerbit,tahun_terbit,lokasi)
-                  VALUES ('$kode_buku','$isbn','$judul','$pengarang','$penerbit','$tahun_terbit','$lokasi')");
+    $conn->query("INSERT INTO tb_detil_buku (kode_buku,isbn,judul,pengarang,penerbit,tahun_terbit,lokasi,status_pinjam,arsip,hapus)
+                  VALUES ('$kode_buku','$isbn','$judul','$pengarang','$penerbit','$tahun_terbit','$lokasi','kembali','tidak','tidak')");
   }
+  $kode_buku2 = $isbn.'-'.sprintf('%03d',1);
+  $conn->query("UPDATE tb_detil_buku SET arsip = 'ya' WHERE kode_buku = '$kode_buku2' ");
+
 
 
 ?>
