@@ -26,7 +26,7 @@
         $sql = "SELECT judul FROM tb_buku";
           $result = mysqli_query($conn,$sql);
           $rows = mysqli_num_rows($result);
-          echo "<strong>".$rows." buku</strong>";
+          echo "<strong>".$rows." judul</strong>";
         ?>
       </p>
       <hr>
