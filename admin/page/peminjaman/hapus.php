@@ -4,6 +4,7 @@
   $kode_buku = mysqli_escape_string($conn, $_POST['kode_buku']);
   // $conn->query("DELETE FROM tb_buku where id ='$id'");
   $conn->query("DELETE FROM tb_temp_buku where kode_buku ='$kode_buku'");
+  $conn->query("UPDATE tb_detil_buku SET status_pinjam = 'kembali' WHERE kode_buku = '$kode_buku'");
 
  ?>
 

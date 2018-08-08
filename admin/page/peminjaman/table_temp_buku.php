@@ -37,3 +37,8 @@ $conn = mysqli_connect('localhost','root','','perpustakaanpc');
       <?php } ?>
     </tbody>
   </table>
+<script>
+$(document).ready(function () {
+  $('#dataTables-example-temp-buku').DataTable();
+});
+</script>

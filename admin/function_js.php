@@ -337,7 +337,8 @@ $(document).ready(function () {
 
 // <!-- ajax simpan temp buku modal -->
 $(document).ready(function () {
-  $('.simpan_temp_buku_modal').click(function (e) {
+	$(document).on('click','.simpan_temp_buku_modal', function (e) {
+  // $('.simpan_temp_buku_modal').click(function (e) {
     e.preventDefault();
 		var pkode_buku = $(this).attr('data-id');
     $.ajax({
@@ -348,9 +349,34 @@ $(document).ready(function () {
       }
     })
 		.done(function(response){
-			$("#dataTables-example-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+			$("#container-table-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+			$("#container-table-buku").load("./page/peminjaman/content_modal_cari_buku.php");
 		});
   });
+});
+
+
+$(document).ready(function() {
+	$(document).on('click','.modal_cari', function (e) {
+		e.preventDefault();
+		$.ajax({
+			// url: '/path/to/file',
+			// type: 'default GET (Other values: POST)',
+			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			// data: {param1: 'value1'}
+		})
+		.done(function() {
+			console.log("success");
+			$("#container-table-buku").load("./page/peminjaman/content_modal_cari_buku.php");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+	});
 });
 
 // <!-- ajax hapus temp buku bootstrap modal -->
@@ -368,7 +394,7 @@ $(document).ready(function(){
 	      }
 		  })
 			.done(function(response){
-				$("#dataTables-example-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+				$("#container-table-temp-buku").load("./page/peminjaman/table_temp_buku.php");
 			});
 	});
 });

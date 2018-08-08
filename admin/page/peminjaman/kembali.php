@@ -11,7 +11,11 @@
   while ($data = $sql3->fetch_assoc()) {
     $isbn = $data['isbn'];
     $conn->query("UPDATE tb_buku SET sisa_buku = (sisa_buku+1) WHERE isbn = '$isbn'");
+    $kode_buku = $data['kode_buku'];
+    $conn->query("UPDATE tb_detil_buku SET status_pinjam = 'kembali' WHERE kode_buku = '$kode_buku'");
+
   }
+
 
 
 ?>

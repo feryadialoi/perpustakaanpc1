@@ -73,7 +73,7 @@
 
   <div class="col-xs-4 padding-bottom-10 col-sm-7">
     <button id="btn_kode_buku" type="submit" form="btn_kode_buku" class="simpan_temp_buku btn btn-primary"><i class="material-icons md-18">add</i> Tambah</button>
-    <button data-toggle="modal" data-target="#modal_cari_buku" class="btn btn-primary"><i class="material-icons md-18">search</i></button>
+    <button data-toggle="modal" data-target="#modal_cari_buku" class="modal_cari btn btn-primary"><i class="material-icons md-18">search</i></button>
   </div>
 
 

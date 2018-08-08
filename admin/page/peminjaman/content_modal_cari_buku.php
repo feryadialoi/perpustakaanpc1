@@ -1,19 +1,6 @@
 <?php
   $conn = mysqli_connect('localhost','root','','perpustakaanpc');
 ?>
-<!-- Modal -->
-<div class="modal fade" id="modal_cari_buku" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><i class="material-icons">exit_to_app</i> Daftar Buku</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="table-responsive" id="container-table-buku">
           <table class="table table-striped table-bordered table-hover" id="dataTables-example-buku-modal">
             <thead>
               <tr>
@@ -50,15 +37,8 @@
                 <?php } ?>
               </tbody>
             </table>
-        </div>
-
-
-      </div>
-      <div class="modal-footer">
-        <!-- <a style="min-width:80px;" href="" class="btn btn-danger">Ya</a> -->
-        <button style="min-width:80px;" type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#dataTables-example-buku-modal').DataTable();
+});
+</script>
