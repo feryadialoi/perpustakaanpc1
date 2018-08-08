@@ -18,7 +18,7 @@
             <tbody>
                 <?php
                   $no = 1;
-                  $sql = $conn -> query("SELECT * FROM tb_detil_buku WHERE status_pinjam = 'kembali'");
+                  $sql = $conn -> query("SELECT * FROM tb_detil_buku WHERE status_pinjam = 'kembali' AND arsip = 'tidak'");
                   while ($data= $sql-> fetch_assoc()){
                 ?>
                 <tr>

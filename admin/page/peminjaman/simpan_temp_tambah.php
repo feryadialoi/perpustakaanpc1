@@ -31,7 +31,7 @@ $isbn = substr($kode_buku, 0, 5);
   $sql3 = "INSERT INTO tb_temp_buku (kode_buku,isbn,judul,pengarang,penerbit,tahun_terbit,lokasi)
           SELECT kode_buku,isbn,judul,pengarang,penerbit,tahun_terbit,lokasi
           FROM tb_detil_buku
-          WHERE kode_buku = '$kode_buku' AND status_pinjam = 'kembali'";
+          WHERE kode_buku = '$kode_buku' AND status_pinjam = 'kembali' AND arsip = 'tidak'";
 
   $conn->query($sql3);
 
