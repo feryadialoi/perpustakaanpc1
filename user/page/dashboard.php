@@ -164,7 +164,9 @@
             <td>
               <?php
               if ($data['grandtotal_denda']>0) {
-                echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+                // echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+                // echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'],2,",",".")."</font><br>";
+                echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'])."</font>";
               }else {
                 echo "Rp ".$data['grandtotal_denda'];
               }
@@ -244,7 +246,7 @@
                       <td>
                         <?php
                         if ($data['lama_terlambat']>0) {
-                          echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+                          echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'])."</font>";
                         }else {
                           echo "Rp ".$data['grandtotal_denda'];
                         }

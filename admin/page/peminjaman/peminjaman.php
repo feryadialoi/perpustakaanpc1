@@ -88,9 +88,9 @@
 
                           //atur keterlambatan pengembalian denda
                           if($lambat>0){
-                            echo "<font color='red'>Rp $denda_a</font>";
+                            echo "<font color='red'>Rp ".number_format($denda_a)."</font>";
                           }else{
-                            echo "Rp $denda_a";
+                            echo "Rp ".number_format($denda_a);
                           }
                           ?></td>
                           <td><?php echo $data['status_pinjam'];?></td>

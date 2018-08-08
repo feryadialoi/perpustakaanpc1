@@ -51,9 +51,9 @@ $html = '
           $html .= '<td>'. $data["lama_terlambat"].' Hari</td>';
         }
         if ($data["grandtotal_denda"]>0) {
-          $html .= '<td><font color="red">Rp '. $data["grandtotal_denda"].'</font></td>';
+          $html .= '<td><font color="red">Rp '. number_format($data["grandtotal_denda"]).'</font></td>';
         }else {
-          $html .= '<td>Rp '. $data["grandtotal_denda"].'</td>';
+          $html .= '<td>Rp '. number_format($data["grandtotal_denda"]).'</td>';
         }
       $html .='
       <td>'. $data['status_pinjam'].'</td>

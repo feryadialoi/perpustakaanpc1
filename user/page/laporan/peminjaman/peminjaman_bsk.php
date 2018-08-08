@@ -53,17 +53,17 @@
               <?php
                 if ($data['lama_terlambat']>0) {
                   echo "<font color='red'>".$data['lama_terlambat']." Hari</font>";
-                }else {
+                }else{
                   echo $data['lama_terlambat']." Hari";
                 }
               ?>
             </td>
             <td>
               <?php
-              if ($data['grandtotal_denda']>0) {
-                echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+              if ($data['grandtotal_denda']>0){
+                echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'])."</font>";
               }else {
-                echo "Rp ".$data['grandtotal_denda'];
+                echo "Rp ".number_format($data['grandtotal_denda']);
               }
               ?>
             </td>
@@ -150,13 +150,13 @@
                 }
               ?>
             </td>
-            <td><?php echo "Rp ".$data2['denda'];?></td>
+            <td><?php echo "Rp ".number_format($data2['denda']);?></td>
             <td>
               <?php
                 if ($data2['subtotal_denda']>0){
-                  echo "<font color='red'>Rp ".$data2['subtotal_denda']."</font>";
+                  echo "<font color='red'>Rp ".number_format($data2['subtotal_denda'])."</font>";
                 }else {
-                  echo "Rp ".$data2['subtotal_denda'];
+                  echo "Rp ".number_format($data2['subtotal_denda']);
                 }
               ?>
             </td>

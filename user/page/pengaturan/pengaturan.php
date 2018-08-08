@@ -13,7 +13,7 @@
     <h2>Denda / hari</h2>
   </div>
   <div class="col-md-4">
-    <?php echo "<h2>: Rp ".$data['denda']."</h2>"; ?>
+    <?php echo "<h2>: Rp ".number_format($data['denda'])."</h2>"; ?>
   </div>
 </div>
 <div class="row">
@@ -31,7 +31,7 @@
   <form class="" action="" method="post" id="formPengaturan">
     <div class="form-group">
       <label>Denda</label>
-      <input value="<?php echo $data['denda']; ?>" id="pengaturan_denda" class="form-control" name="pengaturan_denda" required/>
+      <input value="<?php echo number_format($data['denda']); ?>" id="pengaturan_denda" class="form-control" name="pengaturan_denda" required/>
     </div>
     <div class="form-group">
       <label>Maksimal Lama Pinjam</label>

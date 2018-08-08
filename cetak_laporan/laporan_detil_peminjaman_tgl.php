@@ -65,9 +65,9 @@ $query1 = "SELECT* FROM tb_anggota t1
               <td>Rp '. $data['denda'].'</td>';
 
               if ($data["subtotal_denda"]>0) {
-                $html .= '<td><font color="red">Rp '. $data["subtotal_denda"].'</font></td>';
+                $html .= '<td><font color="red">Rp '. number_format($data["subtotal_denda"]).'</font></td>';
               }else {
-                $html .= '<td>Rp '. $data["subtotal_denda"].'</td>';
+                $html .= '<td>Rp '. number_format($data["subtotal_denda"]).'</td>';
               }
               $html .='
               <td>'. $data["status_pinjam"] .'</td>
