@@ -6,10 +6,12 @@ $(document).ready(function(){
 		$('.hapus_data_anggota').click(function(e){
 			e.preventDefault();
 			var pnis = $(this).attr('data-id');
+			var pnama = $(this).attr('data-nama');
 			var parent = $(this).parent("td").parent("tr");
 
 			bootbox.dialog({
-			  message: "Anda yakin ingin menghapus?",
+			  message: "Anda Yakin Hapus Anggota <br> NIS : "
+				+pnis+"<br> Nama : "+pnama+" ?",
 			  title: "<i class='material-icons'>delete</i> Hapus",
 			  buttons: {
 				danger: {
@@ -50,10 +52,12 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		var pisbn = $(this).attr('data-id');
+		var pjudul = $(this).attr('data-judul');
 		var parent = $(this).parent("td").parent("tr");
 
 		bootbox.dialog({
-		  message: "Anda yakin ingin menghapus?",
+		  message: "Anda Yakin Hapus Buku <br> ISBN : "
+			+pisbn+"<br> Judul : "+pjudul+" ?",
 		  title: "<i class='material-icons'>delete</i> Hapus",
 		  buttons: {
 			danger: {

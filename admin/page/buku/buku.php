@@ -55,7 +55,7 @@
                     <td><?php echo $data['lokasi'];?></td>
                     <td>
                       <a href="?page=buku&aksi=edit&isbn=<?php echo $data['isbn'];?>" class="btn btn-primary"><i class="material-icons md-18">edit</i></a>
-                      <a class="btn btn-danger hapus_data_buku" data-id="<?php echo $data['isbn']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
+                      <a class="btn btn-danger hapus_data_buku" data-judul="<?php echo $data['judul']; ?>" data-id="<?php echo $data['isbn']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
                     </td>
                   </tr>
 

@@ -40,7 +40,7 @@
                       <td><?php echo $data['tingkat'];?></td>
                       <td>
                           <a href="?page=anggota&aksi=edit&nis=<?php echo $data['nis'];?>" class="btn btn-primary"><i class="material-icons md-18">edit</i></a>
-                          <a class="hapus_data_anggota btn btn-danger" data-id="<?php echo $data['nis']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
+                          <a class="hapus_data_anggota btn btn-danger" data-nama="<?php echo $data['nama_anggota']; ?>" data-id="<?php echo $data['nis']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
                       </td>
                     </tr>
                     <?php } ?>
