@@ -405,6 +405,12 @@ $(document).ready(function () {
 	$('#dataTables-example').DataTable();
 });
 $(document).ready(function () {
+	$('#dataTables-example-buku').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-buku2').DataTable();
+});
+$(document).ready(function () {
 	$('#dataTables-example-temp-buku').DataTable();
 });
 $(document).ready(function () {

@@ -9,7 +9,7 @@
 
         <div class="panel-body">
           <div class="table-responsive" id="container-table-buku">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example-buku">
               <thead>
                 <tr>
                   <th>No</th>
@@ -57,6 +57,72 @@
                       <a href="?page=buku&aksi=edit&isbn=<?php echo $data['isbn'];?>" class="btn btn-primary"><i class="material-icons md-18">edit</i></a>
                       <a class="btn btn-danger hapus_data_buku" data-judul="<?php echo $data['judul']; ?>" data-id="<?php echo $data['isbn']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
                     </td>
+                  </tr>
+
+
+                  <?php } ?>
+                </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+             <h1>Data Detil Buku</h1>
+        </div>
+
+        <div class="panel-body">
+          <div class="table-responsive" id="container-table-buku">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example-buku2">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Judul</th>
+                  <th>ISBN</th>
+                  <th>Kode Buku</th>
+                  <th>Pengarang</th>
+                  <th>Penerbit</th>
+                  <th>Tahun Terbit</th>
+                  <th>Status Pinjam</th>
+                  <th>Arsip</th>
+                  <th>Lokasi</th>
+                  <!-- <th>Aksi</th>
+                </tr> -->
+              </thead>
+                <!-- fetching item dari database ke form -->
+              <tbody>
+                  <?php
+                    $no = 1;
+                    $query = "SELECT judul,
+                                      isbn,
+                                      kode_buku,
+                                      pengarang,
+                                      penerbit,
+                                      tahun_terbit,
+                                      status_pinjam,
+                                      arsip,
+                                      lokasi
+                              FROM tb_detil_buku
+                              WHERE hapus = 'tidak'";
+                    $sql = $conn -> query($query);
+                    while ($data= $sql-> fetch_assoc()){
+                  ?>
+                  <tr>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $data['judul'];?></td>
+                    <td><?php echo $data['isbn'];?></td>
+                    <td><?php echo $data['kode_buku'];?></td>
+                    <td><?php echo $data['pengarang'];?></td>
+                    <td><?php echo $data['penerbit'];?></td>
+                    <td><?php echo $data['tahun_terbit'];?></td>
+                    <td><?php echo $data['status_pinjam'];?></td>
+                    <td><?php echo $data['arsip'];?></td>
+                    <td><?php echo $data['lokasi'];?></td>
+                    <!-- <td>
+                      <a href="?page=buku&aksi=edit&isbn=<?php echo $data['isbn'];?>" class="btn btn-primary"><i class="material-icons md-18">edit</i></a>
+                      <a class="btn btn-danger hapus_data_buku" data-judul="<?php echo $data['judul']; ?>" data-id="<?php echo $data['isbn']; ?>" href="javascript:void(0)"><i class="material-icons md-18">delete</i></a>
+                    </td> -->
                   </tr>
 
 
