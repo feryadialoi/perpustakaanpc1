@@ -52,19 +52,19 @@
 </div>
 </div>
 <?php
-  $pengaturan_denda = $_POST['pengaturan_denda'];
-  $maksimal_lama = $_POST['pengaturan_maksimal_lama_pinjam'];
-  $simpan = $_POST['simpan'];
-  $sql = "UPDATE tb_pengaturan SET denda = $pengaturan_denda, maksimal_lama_pinjam = $maksimal_lama
-  WHERE id_pengaturan = 1";
-  if ($simpan == true) {
-    // code...
-    $conn->query($sql);
-    echo "
-    <script>
-      alert('Pengaturan sudah disimpan');
-      window.location.href='?page=pengaturan';
-    </script>
-    ";
-  }
+  // $pengaturan_denda = $_POST['pengaturan_denda'];
+  // $maksimal_lama = $_POST['pengaturan_maksimal_lama_pinjam'];
+  // $simpan = $_POST['simpan'];
+  // $sql = "UPDATE tb_pengaturan SET denda = $pengaturan_denda, maksimal_lama_pinjam = $maksimal_lama
+  // WHERE id_pengaturan = 1";
+  // if ($simpan == true) {
+  //   // code...
+  //   $conn->query($sql);
+  //   echo "
+  //   <script>
+  //     alert('Pengaturan sudah disimpan');
+  //     window.location.href='?page=pengaturan';
+  //   </script>
+  //   ";
+  // }
 ?>

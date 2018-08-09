@@ -608,6 +608,60 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	// $('.simpan_pengaturan').click(function (e) {
+		$(document).on('click','.simpan_pengaturan', function (e) {
+		e.preventDefault();
+		var pdenda = document.getElementById('pengaturan_denda').value;
+		var pmaks = document.getElementById('pengaturan_maksimal_lama_pinjam').value;
+		// alert("OK");
+		$.ajax({
+			url: './page/pengaturan/simpan_pengaturan.php',
+			type: 'POST',
+			data: {
+				'denda': pdenda,
+				'maks': pmaks
+			}
+		})
+		.done(function() {
+			console.log("success");
+			bootbox.dialog({
+				message: "Pengaturan Berhasil Disimpan!",
+				title: "<i class='material-icons md-18'>settings</i> Pengaturan",
+				buttons: {
+					success: {
+						label: "OK",
+						className: "btn-success",
+						callback: function() {
+						$('.bootbox').modal('hide');
+						 window.location.href="?page=pengaturan";
+						}
+					}
+				}
+			});
+		})
+		.fail(function() {
+			console.log("error");
+			bootbox.dialog({
+				message: "Pengaturan Gagal Disimpan!",
+				title: "<i class='material-icons md-18'>settings</i> Pengaturan",
+				buttons: {
+					success: {
+						label: "OK",
+						className: "btn-success",
+						callback: function() {
+						$('.bootbox').modal('hide');
+						 window.location.href="?page=pengaturan";
+						}
+					}
+				}
+			});
+		})
+		.always(function() {
+			console.log("complete");
+		});
 
+	});
+});
 
 </script>
