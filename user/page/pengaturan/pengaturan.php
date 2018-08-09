@@ -31,7 +31,7 @@
   <form class="" action="" method="post" id="formPengaturan">
     <div class="form-group">
       <label>Denda</label>
-      <input value="<?php echo number_format($data['denda']); ?>" id="pengaturan_denda" class="form-control" name="pengaturan_denda" required/>
+      <input value="<?php echo $data['denda']; ?>" id="pengaturan_denda" class="form-control" name="pengaturan_denda" required/>
     </div>
     <div class="form-group">
       <label>Maksimal Lama Pinjam</label>
