@@ -17,6 +17,7 @@
                 <th>Nis</th>
                 <th>Nama</th>
                 <th>Tanggal Pinjam</th>
+                <th>Tanggal Harus Kembali</th>
                 <th>Tanggal Kembali</th>
                 <th>Terlambat</th>
                 <th>Total Denda</th>
@@ -27,11 +28,11 @@
         <tbody>
           <?php
           $no = 1;
-          $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda
+          $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.lama_terlambat,t1.grandtotal_denda
                     FROM tb_peminjaman t1
                     INNER JOIN tb_detil_peminjaman t2
                     ON t1.kode_pinjam = t2.kode_pinjam";
-          $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
+          $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
                     FROM tb_peminjaman t1
                     INNER JOIN tb_detil_peminjaman t2
                     ON t1.kode_pinjam = t2.kode_pinjam
@@ -48,6 +49,7 @@
             <td><?php echo $data['nis'];?></td>
             <td><?php echo $data['nama_anggota'];?></td>
             <td><?php echo $data['tgl_pinjam'];?></td>
+            <td><?php echo $data['tgl_harus_kembali'];?></td>
             <td><?php echo $data['tgl_kembali'];?></td>
             <td>
               <?php
@@ -99,6 +101,7 @@
                 <th>ISBN</th>
                 <th>Kode Buku</th>
                 <th>Tanggal Pinjam</th>
+                <th>Tanggal Harus Kembali</th>
                 <th>Tanggal Kembali</th>
                 <th>Terlambat</th>
                 <th>Denda</th>
@@ -110,11 +113,11 @@
         <tbody>
           <?php
           $no = 1;
-          $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda
+          $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.lama_terlambat,t1.grandtotal_denda
                     FROM tb_peminjaman t1
                     INNER JOIN tb_detil_peminjaman t2
                     ON t1.kode_pinjam = t2.kode_pinjam";
-          $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
+          $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
                     FROM tb_peminjaman t1
                     INNER JOIN tb_detil_peminjaman t2
                     ON t1.kode_pinjam = t2.kode_pinjam
@@ -139,6 +142,7 @@
             <td><?php echo $data2['isbn'];?></td>
             <td><?php echo $data2['kode_buku'];?></td>
             <td><?php echo $data2['tgl_pinjam'];?></td>
+            <td><?php echo $data2['tgl_harus_kembali'];?></td>
             <td><?php echo $data2['tgl_kembali'];?></td>
             <td>
               <?php

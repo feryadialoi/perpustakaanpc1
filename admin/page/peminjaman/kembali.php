@@ -15,5 +15,5 @@
     $conn->query("UPDATE tb_detil_buku SET status_pinjam = 'kembali' WHERE kode_buku = '$kode_buku'");
 
   }
-
+  $conn->query("UPDATE tb_detil_peminjaman SET tgl_kembali = date('Y-m-d')");
 ?>

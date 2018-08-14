@@ -33,11 +33,11 @@
 
                         $no = 1;
 
-                        $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda
+                        $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.lama_terlambat,t1.grandtotal_denda
                                   FROM tb_peminjaman t1
                                   INNER JOIN tb_detil_peminjaman t2
                                   ON t1.kode_pinjam = t2.kode_pinjam";
-                        $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
+                        $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
                                   FROM tb_peminjaman t1
                                   INNER JOIN tb_detil_peminjaman t2
                                   ON t1.kode_pinjam = t2.kode_pinjam
@@ -55,15 +55,15 @@
                           <td><?php echo $data['nis'];?></td>
                           <td><?php echo $data['nama_anggota'];?></td>
                           <td><?php echo $data['tgl_pinjam'];?></td>
-                          <td><?php echo $data['tgl_kembali'];?></td>
+                          <td><?php echo $data['tgl_harus_kembali'];?></td>
                           <!-- <td><?php //echo $data['lama_terlambat'];?></td> -->
                           <td><?php
-                          $tgl_dateline = $data['tgl_kembali'];
+                          $tgl_dateline = $data['tgl_harus_kembali'];
 
-                          $tgl_kembali = date('Y-m-d');
+                          $tgl_harus_kembali = date('Y-m-d');
 
                           //echo $tgl_dateline2;
-                          $lambat = terlambat($tgl_dateline, $tgl_kembali);
+                          $lambat = terlambat($tgl_dateline, $tgl_harus_kembali);
                           // echo $lambat;
                           $denda_a = $lambat * $denda;
 
@@ -77,12 +77,12 @@
                           ?></td>
                           <!-- <td><?php //echo $data['grandtotal_denda'];?></td> -->
                           <td><?php
-                          $tgl_dateline = $data['tgl_kembali'];
+                          $tgl_dateline = $data['tgl_harus_kembali'];
 
-                          $tgl_kembali = date('Y-m-d');
+                          $tgl_harus_kembali = date('Y-m-d');
 
                           //echo $tgl_dateline2;
-                          $lambat = terlambat($tgl_dateline, $tgl_kembali);
+                          $lambat = terlambat($tgl_dateline, $tgl_harus_kembali);
                           // echo $lambat;
                           $denda_a = $lambat * $denda;
 

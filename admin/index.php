@@ -31,9 +31,9 @@ $sql = $conn->query("SELECT * FROM tb_peminjaman t1
                     WHERE t1.status_pinjam = 'pinjam'");
 while($data = $sql->fetch_assoc()){
   $kode_pinjam = $data['kode_pinjam'];
-  $tgl_dateline = $data['tgl_kembali'];
-  $tgl_kembali = date('Y-m-d');
-  $lambat = terlambat($tgl_dateline, $tgl_kembali);
+  $tgl_dateline = $data['tgl_harus_kembali'];
+  $tgl_harus_kembali = date('Y-m-d');
+  $lambat = terlambat($tgl_dateline, $tgl_harus_kembali);
   $denda2 = $data['denda'];
   $subtotal_denda = $lambat * $denda2;
 

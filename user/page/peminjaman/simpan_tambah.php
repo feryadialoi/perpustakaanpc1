@@ -12,17 +12,17 @@
 
 
   // definisi tanggal kembali
-  $tgl_kembali = date('Y-m-d', strtotime('+'.$lama_pinjam.' days', strtotime($tgl_pinjam))); //operasi penjumlahan tanggal sebanyak 6 hari
+  $tgl_harus_kembali = date('Y-m-d', strtotime('+'.$lama_pinjam.' days', strtotime($tgl_pinjam))); //operasi penjumlahan tanggal sebanyak 6 hari
   //print tanggal
-  //echo $tgl_kembali;
+  //echo $tgl_harus_kembali;
 
   //query insert tb_peminjaman
   $conn->query("INSERT INTO tb_peminjaman (kode_pinjam, nis, tgl_pinjam,status_pinjam)
                 VALUES ('$kode_pinjam','$nis','$tgl_pinjam','pinjam')");
 
   //query insert tb_detil_peminjaman
-  $conn->query("INSERT INTO tb_detil_peminjaman (kode_pinjam,kode_buku,isbn,judul,tgl_pinjam,lama_pinjam,tgl_kembali,denda)
-                SELECT '$kode_pinjam',kode_buku, isbn, judul,'$tgl_pinjam','$lama_pinjam','$tgl_kembali','$denda'
+  $conn->query("INSERT INTO tb_detil_peminjaman (kode_pinjam,kode_buku,isbn,judul,tgl_pinjam,lama_pinjam,tgl_harus_kembali,denda)
+                SELECT '$kode_pinjam',kode_buku, isbn, judul,'$tgl_pinjam','$lama_pinjam','$tgl_harus_kembali','$denda'
                 FROM tb_temp_buku
                 WHERE kode_buku = kode_buku");
 

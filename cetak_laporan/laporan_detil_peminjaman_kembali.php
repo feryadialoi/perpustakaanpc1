@@ -20,6 +20,7 @@ $html = '
     <th>ISBN</th>
     <th>Kode Buku</th>
     <th>Tanggal Pinjam</th>
+    <th>Tanggal Harus Kembali</th>
     <th>Tanggal Kembali</th>
     <th>Terlambat</th>
     <th>Denda</th>
@@ -30,7 +31,7 @@ $html = '
   <tbody>'.
 
   $no = 1;
-  $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
+  $query = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
             FROM tb_peminjaman t1
             INNER JOIN tb_detil_peminjaman t2
             ON t1.kode_pinjam = t2.kode_pinjam
@@ -55,6 +56,7 @@ $html = '
       <td>'. $data["isbn"] .'</td>
       <td>'. $data["kode_buku"] .'</td>
       <td>'. $data["tgl_pinjam"] .'</td>
+      <td>'. $data["tgl_harus_kembali"] .'</td>
       <td>'. $data["tgl_kembali"] .'</td>';
       if ($data["lama_terlambat"]>0) {
         $html .= '<td><font color="red">'. $data["lama_terlambat"].' Hari</font></td>';
