@@ -17,6 +17,7 @@
                               <th>Nis</th>
                               <th>Nama</th>
                               <th>Tanggal Pinjam</th>
+                              <th>Tanggal Harus Kembali</th>
                               <th>Tanggal Kembali</th>
                               <th>Terlambat</th>
                               <th>Total Denda</th>
@@ -37,7 +38,7 @@
                                   FROM tb_peminjaman t1
                                   INNER JOIN tb_detil_peminjaman t2
                                   ON t1.kode_pinjam = t2.kode_pinjam";
-                        $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
+                        $query1 = "SELECT DISTINCT t1.kode_pinjam,t1.nis,t3.nama_anggota,t1.tgl_pinjam,t2.tgl_harus_kembali,t2.tgl_kembali,t2.lama_terlambat,t1.grandtotal_denda,t1.status_pinjam
                                   FROM tb_peminjaman t1
                                   INNER JOIN tb_detil_peminjaman t2
                                   ON t1.kode_pinjam = t2.kode_pinjam
@@ -56,43 +57,27 @@
                           <td><?php echo $data['nama_anggota'];?></td>
                           <td><?php echo $data['tgl_pinjam'];?></td>
                           <td><?php echo $data['tgl_harus_kembali'];?></td>
-                          <!-- <td><?php //echo $data['lama_terlambat'];?></td> -->
-                          <td><?php
-                          $tgl_dateline = $data['tgl_harus_kembali'];
-
-                          $tgl_harus_kembali = date('Y-m-d');
-
-                          //echo $tgl_dateline2;
-                          $lambat = terlambat($tgl_dateline, $tgl_harus_kembali);
-                          // echo $lambat;
-                          $denda_a = $lambat * $denda;
-
-                          //atur keterlambatan pengembalian denda
-                          if($lambat>0){
-                            echo "<font color='red'>".$lambat." Hari</font>";
-                          }else{
-                            echo $lambat . " Hari<br>";
-                          }
-
-                          ?></td>
-                          <!-- <td><?php //echo $data['grandtotal_denda'];?></td> -->
-                          <td><?php
-                          $tgl_dateline = $data['tgl_harus_kembali'];
-
-                          $tgl_harus_kembali = date('Y-m-d');
-
-                          //echo $tgl_dateline2;
-                          $lambat = terlambat($tgl_dateline, $tgl_harus_kembali);
-                          // echo $lambat;
-                          $denda_a = $lambat * $denda;
-
-                          //atur keterlambatan pengembalian denda
-                          if($lambat>0){
-                            echo "<font color='red'>Rp ".number_format($denda_a)."</font>";
-                          }else{
-                            echo "Rp ".number_format($denda_a);
-                          }
-                          ?></td>
+                          <td><?php echo $data['tgl_kembali'];?></td>
+                          <td>
+                            <?php
+                              if ($data['lama_terlambat']>0) {
+                                echo "<font color='red'>".$data['lama_terlambat']." Hari</font>";
+                              }else {
+                                echo $data['lama_terlambat']." Hari";
+                              }
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                            if ($data['grandtotal_denda']>0) {
+                              // echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+                              // echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'],2,",",".")."</font><br>";
+                              echo "<font color='red'>Rp ".number_format($data['grandtotal_denda'])."</font>";
+                            }else {
+                              echo "Rp ".$data['grandtotal_denda'];
+                            }
+                            ?>
+                          </td>
                           <td><?php echo $data['status_pinjam'];?></td>
                           <td>
                             <!-- button aksi menggunakan data-attr -->
