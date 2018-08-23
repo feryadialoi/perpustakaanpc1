@@ -9,7 +9,7 @@ $html = '
 <body style="font-family:arial;">
 <H2 align="center">Sekolah Pelita Cemerlang</H2>
 <p align="center"><strong>Jl. Perdana no. 18 Pontianak Tenggara<br>
-<h2 align="center">Laporan Peminjaman Masih Dipinjam</h2></strong></p>
+<h2 align="center">Laporan Detil Peminjaman Masih Dipinjam</h2></strong></p>
 <table width="100%" border="1" cellspacing="0" cellpadding="5">
   <thead>
   <tr>
