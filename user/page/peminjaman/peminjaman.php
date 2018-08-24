@@ -5,7 +5,7 @@
       <!-- Table data anggota -->
       <div class="panel panel-default">
           <div class="panel-heading">
-               <h1>Peminjaman</h1>
+               <h1>Data Peminjaman</h1>
           </div>
           <div class="panel-body">
               <div class="table-responsive" id="container-table-anggota">
