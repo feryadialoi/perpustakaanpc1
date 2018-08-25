@@ -147,7 +147,7 @@ $(document).ready(function () {
     var ptgl_lahir = document.getElementById('tgl_lahir_tambah_anggota').value;
     var pjk = document.getElementById('jk_tambah_anggota').value;
     var ptingkat = document.getElementById('tingkat_tambah_anggota').value;
-		var pnama_user = '<?php echo $_SESSION['nama_user']; ?>'
+		var pusername = '<?php echo $_SESSION['username']; ?>'
     $.ajax({
       type: 'POST',
       url: './page/anggota/simpan_tambah.php',
@@ -158,7 +158,7 @@ $(document).ready(function () {
         'tgl_lahir': ptgl_lahir,
         'jk': pjk,
         'tingkat': ptingkat,
-				'nama_user': pnama_user
+				'username': pusername
       }
     });
 
@@ -237,7 +237,7 @@ $(document).ready(function () {
     var ptahun_terbit = document.getElementById('tahun_terbit_tambah_buku').value;
     var pjumlah_buku = document.getElementById('jumlah_buku_tambah_buku').value;
     var plokasi = document.getElementById('lokasi_tambah_buku').value;
-		var pnama_user = '<?php echo $_SESSION['nama_user']; ?>'
+		var pusername = '<?php echo $_SESSION['username']; ?>'
     // alert(pid);
 
     $.ajax({
@@ -252,7 +252,7 @@ $(document).ready(function () {
         'tahun_terbit': ptahun_terbit,
         'jumlah_buku': pjumlah_buku,
         'lokasi': plokasi,
-				'nama_user': pnama_user
+				'username': pusername
       }
     });
 
