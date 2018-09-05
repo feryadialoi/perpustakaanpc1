@@ -22,7 +22,6 @@ $html = '
       <th>Jumlah Buku</th>
       <th>Sisa Buku</th>
       <th>Lokasi</th>
-      <th>Nama User</th>
     </tr>
   </thead>
   <tbody>'.
@@ -35,8 +34,7 @@ $html = '
                             t2.tahun_terbit,
                             t1.jumlah_buku,
                             t1.sisa_buku,
-                            t2.lokasi,
-                            t1.nama_user
+                            t2.lokasi
             FROM tb_buku t1
             INNER JOIN tb_detil_buku t2
             ON t1.isbn = t2.isbn
@@ -54,7 +52,6 @@ $html = '
       <td>'. $data["jumlah_buku"] .'</td>
       <td>'. $data["sisa_buku"] .'</td>
       <td>'. $data["lokasi"] .'</td>
-      <td>'. $data["nama_user"] .'</td>
     </tr>';
   }
   $html .= '</tbody>

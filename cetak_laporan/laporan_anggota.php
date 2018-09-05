@@ -20,7 +20,6 @@ $html = '
       <th>Tanggal Lahir</th>
       <th>Jenis Kelamin</th>
       <th>Tingkat</th>
-      <th>Nama User</th>
     </tr>
   </thead>
   <tbody>'.
@@ -39,7 +38,6 @@ $html = '
       <td>'. $data["tgl_lahir"] .'</td>
       <td>'. $jk .'</td>
       <td>'. $data["tingkat"] .'</td>
-      <td>'. $data["nama_user"] .'</td>
     </tr>';
   }
   $html .= '</tbody>
