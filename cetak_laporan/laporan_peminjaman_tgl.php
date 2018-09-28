@@ -12,17 +12,17 @@ $html = '
 <h2 align="center">Laporan Peminjaman Per 30 Hari Terakhir</h2></strong></p>
 <table width="100%" border="1" cellspacing="0" cellpadding="5">
   <thead>
-    <tr>
-      <th>No</th>
-      <th>Judul</th>
-      <th>Nomor Induk Siswa</th>
-      <th>Nama</th>
-      <th>Tanggal Pinjam</th>
-      <th>Tanggal Kembali</th>
-      <th>Terlambat</th>
-      <th>Denda</th>
-      <th>Status Pinjam</th>
-    </tr>
+  <tr>
+    <th>No</th>
+    <th>Kode Pinjam</th>
+    <th>NIS</th>
+    <th>Nama</th>
+    <th>Tanggal Pinjam</th>
+    <th>Tanggal Kembali</th>
+    <th>Terlambat</th>
+    <th>Total Denda</th>
+    <th>Status Pinjam</th>
+  </tr>
   </thead>
   <tbody>'.
 
@@ -33,7 +33,8 @@ $html = '
             ON t1.kode_pinjam = t2.kode_pinjam
             INNER JOIN tb_anggota t3
             ON t1.nis = t3.nis
-            WHERE t1.tgl_pinjam BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()";
+            ";
+
 
   $sql = $conn -> query($query1);
   while ($data= $sql-> fetch_assoc()){
@@ -44,48 +45,26 @@ $html = '
       <td>'. $data["nis"] .'</td>
       <td>'. $data["nama_anggota"] .'</td>
       <td>'. $data["tgl_pinjam"] .'</td>
-      <td>'. $data["tgl_kembali"] .'</td>
-      <td>';
-
-      $tgl_dateline = $data['tgl_kembali'];
-      $tgl_kembali = date('Y-m-d');
-
-      $lambat = terlambat($tgl_dateline, $tgl_kembali);
-
-      $denda_a = $lambat * $denda;
-
-      if($lambat>0){
-        $html .='<font color="red">'.$lambat.' Hari</font>';
-      }else{
-        $html .= $lambat . ' Hari';
-      }
-
-      $html .= '</td>
-      <td>';
-      $tgl_dateline = $data['tgl_kembali'];
-      $tgl_kembali = date('Y-m-d');
-
-      $lambat = terlambat($tgl_dateline, $tgl_kembali);
-
-      $denda_a = $lambat * $denda;
-
-      if($lambat>0){
-        $html .='<font color="red">Rp '.$denda_a.'</font>';
-      }else{
-        $html .='Rp '.$denda_a;
-      }
-
-
-      $html .= '</td>';
-
-      $html .= '<td>'. $data["status_pinjam"] .'</td>
+      <td>'. $data["tgl_kembali"] .'</td>';
+        if ($data["lama_terlambat"]>0) {
+          $html .= '<td><font color="red">'. $data["lama_terlambat"].' Hari</font></td>';
+        }else {
+          $html .= '<td>'. $data["lama_terlambat"].' Hari</td>';
+        }
+        if ($data["grandtotal_denda"]>0) {
+          $html .= '<td><font color="red">Rp '. $data["grandtotal_denda"].'</font></td>';
+        }else {
+          $html .= '<td>Rp '. $data["grandtotal_denda"].'</td>';
+        }
+      $html .='
+      <td>'. $data['status_pinjam'].'</td>
     </tr>';
   }
   $html .= '</tbody>
-</table>
-';
+  </table>
+  ';
 
-$mpdf->WriteHTML($html);
+  $mpdf->WriteHTML($html);
 
-$mpdf->Output('laporan.pdf', \Mpdf\Output\Destination::INLINE);
-?>
+  $mpdf->Output('laporan.pdf', \Mpdf\Output\Destination::INLINE);
+  ?>

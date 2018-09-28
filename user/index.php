@@ -1,6 +1,7 @@
 <!-- php code untuk session login mengecek level login start-->
 <?php
   include '../koneksi.php';
+  include_once '../function.php';
   //mengaktifkan session_start
   session_start();
   //cek apakah user telah login, jika belum login maka di alihkan ke halaman Login
@@ -16,7 +17,41 @@
   $_SESSION['maksimal_lama_pinjam'] = $data_pengaturan['maksimal_lama_pinjam'];
   $maks = $_SESSION['maksimal_lama_pinjam'];
 
-  // $kode_pinjam = $_REQUEST['kode_pinjam'];
+
+
+
+
+
+
+//hitung terlambat dan $denda
+
+$sql = $conn->query("SELECT * FROM tb_peminjaman t1
+                    INNER JOIN tb_detil_peminjaman t2
+                    ON t1.kode_pinjam = t2.kode_pinjam
+                    WHERE t1.status_pinjam = 'pinjam'");
+while($data = $sql->fetch_assoc()){
+  $kode_pinjam = $data['kode_pinjam'];
+  $tgl_dateline = $data['tgl_kembali'];
+  $tgl_kembali = date('Y-m-d');
+  $lambat = terlambat($tgl_dateline, $tgl_kembali);
+  $denda2 = $data['denda'];
+  $subtotal_denda = $lambat * $denda2;
+
+  $conn->query("UPDATE tb_detil_peminjaman
+                SET lama_terlambat = '$lambat', subtotal_denda = '$subtotal_denda'
+                WHERE kode_pinjam = '$kode_pinjam'");
+}
+
+$sql = $conn->query("SELECT * FROM tb_peminjaman WHERE status_pinjam = 'pinjam'");
+while($data = $sql->fetch_assoc()){
+  $kode_pinjam = $data['kode_pinjam'];
+  $sql1 = $conn->query("SELECT SUM(subtotal_denda) AS grand_total FROM tb_detil_peminjaman WHERE kode_pinjam = '$kode_pinjam'");
+  while($data1 = $sql1->fetch_assoc()){
+    $grandtotal_denda = $data1['grand_total'];
+    $conn->query("UPDATE tb_peminjaman SET grandtotal_denda = '$grandtotal_denda'
+                  WHERE kode_pinjam = '$kode_pinjam' AND status_pinjam = 'pinjam'");
+  }
+}
 ?>
 <!-- php code untuk session login mengecek level login end-->
 

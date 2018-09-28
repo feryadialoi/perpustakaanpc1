@@ -44,48 +44,26 @@ $html = '
       <td>'. $data["nis"] .'</td>
       <td>'. $data["nama_anggota"] .'</td>
       <td>'. $data["tgl_pinjam"] .'</td>
-      <td>'. $data["tgl_kembali"] .'</td>
-      <td>';
-
-      $tgl_dateline = $data['tgl_kembali'];
-      $tgl_kembali = date('Y-m-d');
-
-      $lambat = terlambat($tgl_dateline, $tgl_kembali);
-
-      $denda_a = $lambat * $denda;
-
-      if($lambat>0){
-        $html .='<font color="red">'.$lambat.' Hari</font>';
-      }else{
-        $html .= $lambat . ' Hari';
-      }
-
-      $html .= '</td>
-      <td>';
-      $tgl_dateline = $data['tgl_kembali'];
-      $tgl_kembali = date('Y-m-d');
-
-      $lambat = terlambat($tgl_dateline, $tgl_kembali);
-
-      $denda_a = $lambat * $denda;
-
-      if($lambat>0){
-        $html .='<font color="red">Rp '.$denda_a.'</font>';
-      }else{
-        $html .='Rp '.$denda_a;
-      }
-
-
-      $html .= '</td>';
-
-      $html .= '<td>'. $data["status_pinjam"] .'</td>
+      <td>'. $data["tgl_kembali"] .'</td>';
+        if ($data["lama_terlambat"]>0) {
+          $html .= '<td><font color="red">'. $data["lama_terlambat"].' Hari</font></td>';
+        }else {
+          $html .= '<td>'. $data["lama_terlambat"].' Hari</td>';
+        }
+        if ($data["grandtotal_denda"]>0) {
+          $html .= '<td><font color="red">Rp '. $data["grandtotal_denda"].'</font></td>';
+        }else {
+          $html .= '<td>Rp '. $data["grandtotal_denda"].'</td>';
+        }
+      $html .='
+      <td>'. $data['status_pinjam'].'</td>
     </tr>';
   }
   $html .= '</tbody>
-</table>
-';
+  </table>
+  ';
 
-$mpdf->WriteHTML($html);
+  $mpdf->WriteHTML($html);
 
-$mpdf->Output('laporan.pdf', \Mpdf\Output\Destination::INLINE);
-?>
+  $mpdf->Output('laporan.pdf', \Mpdf\Output\Destination::INLINE);
+  ?>

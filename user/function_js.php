@@ -337,7 +337,7 @@ $(document).ready(function () {
 
 // <!-- ajax simpan temp buku modal -->
 $(document).ready(function () {
-  $('.simpan_temp_buku_modal').click(function (e) {
+	$(document).on('click','.simpan_temp_buku_modal', function (e) {
     e.preventDefault();
 		var pkode_buku = $(this).attr('data-id');
     $.ajax({
@@ -348,15 +348,39 @@ $(document).ready(function () {
       }
     })
 		.done(function(response){
-			$("#dataTables-example-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+			$("#container-table-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+			$("#container-table-buku").load("./page/peminjaman/content_modal_cari_buku.php");
 		});
   });
+});
+
+
+$(document).ready(function() {
+	$(document).on('click','.modal_cari', function (e) {
+		e.preventDefault();
+		$.ajax({
+			// url: '/path/to/file',
+			// type: 'default GET (Other values: POST)',
+			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			// data: {param1: 'value1'}
+		})
+		.done(function() {
+			console.log("success");
+			$("#container-table-buku").load("./page/peminjaman/content_modal_cari_buku.php");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+
+	});
 });
 
 // <!-- ajax hapus temp buku bootstrap modal -->
 $(document).ready(function(){
 	$(document).on('click','.hapus_temp_buku', function (e) {
-	// $('.hapus_temp_buku').click(function (e) {
 		e.preventDefault();
 		var pkode_buku = $(this).attr('data-id');
 		var parent = $(this).parent("td").parent("tr");
@@ -368,7 +392,7 @@ $(document).ready(function(){
 	      }
 		  })
 			.done(function(response){
-				$("#dataTables-example-temp-buku").load("./page/peminjaman/table_temp_buku.php");
+				$("#container-table-temp-buku").load("./page/peminjaman/table_temp_buku.php");
 			});
 	});
 });
@@ -383,7 +407,19 @@ $(document).ready(function () {
 	$('#dataTables-example-pinjam').DataTable();
 });
 $(document).ready(function () {
+	$('#dataTables-example-pinjam2').DataTable();
+});
+$(document).ready(function () {
 	$('#dataTables-example-kembali').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-kembali2').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-tanggal').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-tanggal2').DataTable();
 });
 $(document).ready(function () {
 	$('#dataTables-example-buku-modal').DataTable();

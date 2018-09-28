@@ -102,7 +102,7 @@
 <hr>
 <!-- menu dashboard end -->
 
-<?php include '../function.php'; ?>
+<?php //include '../function.php'; ?>
 
 <div class="row">
 <div class="col-md-12">
@@ -122,7 +122,7 @@
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
                 <th>Terlambat</th>
-                <th>Denda</th>
+                <th>Total Denda</th>
                 <th>Status Pinjam</th>
             </tr>
         </thead>
@@ -154,34 +154,20 @@
             <td><?php echo $data['tgl_kembali'];?></td>
             <td>
               <?php
-                $tgl_dateline = $data['tgl_kembali'];
-                $tgl_kembali = date('Y-m-d');
-                //echo $tgl_dateline2;
-                $lambat = terlambat($tgl_dateline, $tgl_kembali);
-                // echo $lambat;
-                $denda_a = $lambat * $denda;
-                //atur keterlambatan pengembalian denda
-                if($lambat>0){
-                  echo "<font color='red'>".$lambat." Hari</font>";
-                }else{
-                  echo $lambat . " Hari<br>";
+                if ($data['lama_terlambat']>0) {
+                  echo "<font color='red'>".$data['lama_terlambat']." Hari</font>";
+                }else {
+                  echo $data['lama_terlambat']." Hari";
                 }
               ?>
             </td>
             <td>
               <?php
-                $tgl_dateline = $data['tgl_kembali'];
-                $tgl_kembali = date('Y-m-d');
-                //echo $tgl_dateline2;
-                $lambat = terlambat($tgl_dateline, $tgl_kembali);
-                // echo $lambat;
-                $denda_a = $lambat * $denda;
-                //atur keterlambatan pengembalian denda
-                if($lambat>0){
-                  echo "<font color='red'>Rp $denda_a</font>";
-                }else{
-                  echo "Rp $denda_a";
-                }
+              if ($data['grandtotal_denda']>0) {
+                echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+              }else {
+                echo "Rp ">$data['grandtotal_denda'];
+              }
               ?>
             </td>
             <td><?php echo $data['status_pinjam'];?></td>
@@ -216,7 +202,7 @@
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
                 <th>Terlambat</th>
-                <th>Denda</th>
+                <th>Total Denda</th>
                 <th>Status Pinjam</th>
             </tr>
         </thead>
@@ -236,56 +222,42 @@
                     ON t1.nis = t3.nis
                     WHERE t1.status_pinjam = 'kembali'";
 
-          $sql = $conn -> query($query1);
-          while ($data= $sql-> fetch_assoc()){
-          ?>
-          <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $data['kode_pinjam'];?></td>
-            <td><?php echo $data['nis'];?></td>
-            <td><?php echo $data['nama_anggota'];?></td>
-            <td><?php echo $data['tgl_pinjam'];?></td>
-            <td><?php echo $data['tgl_kembali'];?></td>
-            <td>
-              <?php
-                $tgl_dateline = $data['tgl_kembali'];
-                $tgl_kembali = date('Y-m-d');
-                //echo $tgl_dateline2;
-                $lambat = terlambat($tgl_dateline, $tgl_kembali);
-                // echo $lambat;
-                $denda_a = $lambat * $denda;
-                //atur keterlambatan pengembalian denda
-                if($lambat>0){
-                  echo "<font color='red'>".$lambat." Hari</font>";
-                }else{
-                  echo $lambat . " Hari<br>";
-                }
-              ?>
-            </td>
-            <td>
-              <?php
-                $tgl_dateline = $data['tgl_kembali'];
-                $tgl_kembali = date('Y-m-d');
-                //echo $tgl_dateline2;
-                $lambat = terlambat($tgl_dateline, $tgl_kembali);
-                // echo $lambat;
-                $denda_a = $lambat * $denda;
-                //atur keterlambatan pengembalian denda
-                if($lambat>0){
-                  echo "<font color='red'>Rp $denda_a</font>";
-                }else{
-                  echo "Rp $denda_a";
-                }
-              ?>
-            </td>
-            <td><?php echo $data['status_pinjam'];?></td>
-            </td>
-          </tr>
-        <?php } ?>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+                    $sql = $conn -> query($query1);
+                    while ($data= $sql-> fetch_assoc()){
+                    ?>
+                    <tr>
+                      <td><?php echo $no++; ?></td>
+                      <td><?php echo $data['kode_pinjam'];?></td>
+                      <td><?php echo $data['nis'];?></td>
+                      <td><?php echo $data['nama_anggota'];?></td>
+                      <td><?php echo $data['tgl_pinjam'];?></td>
+                      <td><?php echo $data['tgl_kembali'];?></td>
+                      <td>
+                        <?php
+                          if ($data['lama_terlambat']>0) {
+                            echo "<font color='red'>".$data['lama_terlambat']." Hari</font>";
+                          }else {
+                            echo $data['lama_terlambat']." Hari";
+                          }
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                        if ($data['lama_terlambat']>0) {
+                          echo "<font color='red'>Rp ".$data['grandtotal_denda']."</font>";
+                        }else {
+                          echo "Rp ".$data['grandtotal_denda'];
+                        }
+                        ?>
+                      </td>
+                      <td><?php echo $data['status_pinjam'];?></td>
+                      </td>
+                    </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>

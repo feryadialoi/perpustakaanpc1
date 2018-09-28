@@ -1,4 +1,4 @@
-<?php include '../function.php';?>
+<?php //include_once '../function.php';?>
 <a href="?page=peminjaman&aksi=tambah" class="btn btn-primary" style="margin-bottom: 10px"><i class="material-icons md-18">add</i> Tambah Peminjaman</a>
 <div class="row">
   <div class="col-md-12">
@@ -19,7 +19,7 @@
                               <th>Tanggal Pinjam</th>
                               <th>Tanggal Kembali</th>
                               <th>Terlambat</th>
-                              <th>Denda</th>
+                              <th>Total Denda</th>
                               <th>Status Pinjam</th>
                               <th>Aksi</th>
                           </tr>
@@ -106,37 +106,6 @@
                           </div>
                           </td>
                         </tr>
-
-
-
-
-                        <?php
-                          // // $denda = 1000;
-                          // $tgl_dateline = $data['tgl_kembali'];
-                          //
-                          // $tgl_kembali = date('Y-m-d');
-                          // echo $tgl_dateline.'<br>';
-                          // echo $tgl_kembali.'<br>';
-                          // //echo $tgl_dateline2;
-                          // $lambat = terlambat($tgl_dateline, $tgl_kembali);
-                          // // echo $lambat;
-                          // $denda_a = $lambat * $denda;
-                          //
-                          // //atur keterlambatan pengembalian denda
-                          // if($lambat>0){
-                          //   echo "<font color='red'>$lambat hari<br>(Rp $denda_a)</font>";
-                          // }else{
-                          //   echo $lambat . " Hari<br>";
-                          // }
-
-                        ?>
-
-
-
-
-
-
-
                       <?php } ?>
                       </tbody>
                     </table>

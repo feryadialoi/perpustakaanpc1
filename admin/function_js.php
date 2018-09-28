@@ -338,7 +338,6 @@ $(document).ready(function () {
 // <!-- ajax simpan temp buku modal -->
 $(document).ready(function () {
 	$(document).on('click','.simpan_temp_buku_modal', function (e) {
-  // $('.simpan_temp_buku_modal').click(function (e) {
     e.preventDefault();
 		var pkode_buku = $(this).attr('data-id');
     $.ajax({
@@ -382,7 +381,6 @@ $(document).ready(function() {
 // <!-- ajax hapus temp buku bootstrap modal -->
 $(document).ready(function(){
 	$(document).on('click','.hapus_temp_buku', function (e) {
-	// $('.hapus_temp_buku').click(function (e) {
 		e.preventDefault();
 		var pkode_buku = $(this).attr('data-id');
 		var parent = $(this).parent("td").parent("tr");
@@ -409,7 +407,19 @@ $(document).ready(function () {
 	$('#dataTables-example-pinjam').DataTable();
 });
 $(document).ready(function () {
+	$('#dataTables-example-pinjam2').DataTable();
+});
+$(document).ready(function () {
 	$('#dataTables-example-kembali').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-kembali2').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-tanggal').DataTable();
+});
+$(document).ready(function () {
+	$('#dataTables-example-tanggal2').DataTable();
 });
 $(document).ready(function () {
 	$('#dataTables-example-buku-modal').DataTable();
