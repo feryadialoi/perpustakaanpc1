@@ -88,7 +88,7 @@
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
-     <h1>Laporan Detil Peminjaman Masih Dipinjam</h1>
+     <h1>Laporan Detil Peminjaman Sudah Dikembalikan</h1>
    </div>
    <div class="panel-body">
     <div class="table-responsive">
